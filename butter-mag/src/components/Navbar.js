@@ -1,74 +1,66 @@
-import React, { Component } from 'react';
-import Sidebar from "react-sidebar";
-import styled from 'styled-components';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import styled from 'styled-components'
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
 
-export class Navbar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          sidebarOpen: false
-        };
-        this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
-      }
-    
-      onSetSidebarOpen(open) {
-        this.setState({ sidebarOpen: open });
-      }
-    
-    render() {
-        return (
-          <div class="container-fluid">
-            <Sidebar
-            sidebar={
-            <b>
-                <div className="menu-items">
-                    <h3>Butter Media Group</h3>
-                    <hr/>
-                    <h2>News</h2>
-                    <h2>Sports</h2>
-                    <h2>Entertainment</h2>
-                    <h2>Interviews</h2>
-                    <h2>Contact Us</h2>
-                </div>
-            </b>
-            }
-            open={this.state.sidebarOpen}
-            onSetOpen={this.onSetSidebarOpen}
-            styles={{ sidebar: { background: "white", fontFamily: "Raleway", padding: "10px" } }}
-          > 
-          <Wrapper >
-          {/*<button onClick={() => this.onSetSidebarOpen(true)}>
-                
-        </button> */}
-            <i className="fas fa-bars fa-2x my-3 icon" onClick={() => this.onSetSidebarOpen(true)}></i>
-              <Title >Butter</Title>
+const useStyles = makeStyles({
+  list: {
+    width: 250,
+  },
+});
 
-            </Wrapper>
+export default function Navbar() {
+  const classes = useStyles();
+  const [state, setState] = React.useState({
+    left: false,
+  });
 
-          </Sidebar>
-          </div>
-        )
+  const toggleDrawer = (side, open) => event => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
     }
+
+    setState({ ...state, [side]: open });
+  };
+
+  const sideList = side => (
+    <div
+      className={classes.list}
+      role="presentation"
+      onClick={toggleDrawer(side, false)}
+      onKeyDown={toggleDrawer(side, false)}
+    >
+      <List>
+        <h2>News</h2>
+      </List>
+      <Divider />
+    </div>
+  );
+
+  return (
+    <div className="navigation">
+      <div className="row">
+        <div className="col-4">
+      <Button className="fas fa-bars fa-3x text-white"  onClick={toggleDrawer('left', true)}>&nbsp;</Button>
+      </div>
+      <div className="col-4">
+      <h1 className="logo text-center">Butter</h1>
+      </div>
+      <div className="col-4">
+      <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
+        {sideList('left')}
+      </Drawer>
+      </div>
+      </div>
+    </div>
+  );
 }
 
-export default Navbar;
-
-const Title = styled.h1`
-  font-size: 2em;
-  text-align: center;
-  padding-bottom: 1.5rem;
-  color: gold;
-  font-family: 'Pacifico';
-  vertical-align: middle;
-  display: inline;
-  position: absolute;
-  top: 6%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
-
-const Wrapper = styled.section`
-  background: black;
+const Button = styled.button`
+  background: transparent;
+  border: none;
+  padding-left: 20px;
   
-`;
-
+`
