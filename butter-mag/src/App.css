@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .menu-items h2 {
@@ -27,43 +29,3 @@ h3 {
   color: gold;
 }
 
-.landing {
-  position: absolute;
-  top: 5rem;
-}
-
-.landing .card {
-  margin-top: 20px !important;
-  height: 200px !important;
-  font-family: 'Raleway';
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.landing .card img {
-  overflow: hidden;
-}
-
-.landing .card:hover {
-  transform: scale(1.01);
-  background-color: gold;
-}
-
-.landing h1 {
-  animation: fadeIn 3s;
-  letter-spacing: 5px;
-  padding: 5px 0px 0px 20px;
-}
-
-.landing .card p {
-  padding-left: 20px;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-
-  }
-  100% {
-    opacity: 1;
-  }
-}
