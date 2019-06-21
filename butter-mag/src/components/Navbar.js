@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 
@@ -43,16 +43,16 @@ export default function Navbar() {
     <div className="navigation">
       <div className="row">
         <div className="col-4">
-      <Button className="fas fa-bars fa-3x text-white"  onClick={toggleDrawer('left', true)}>&nbsp;</Button>
-      </div>
-      <div className="col-4">
-      <h1 className="logo text-center">Butter</h1>
-      </div>
-      <div className="col-4">
-      <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
-        {sideList('left')}
-      </Drawer>
-      </div>
+          <Button className="fas fa-bars fa-3x text-white"  onClick={toggleDrawer('left', true)}>&nbsp;</Button>
+        </div>
+        <div className="col-4">
+          <h1 className="logo-text text-center">Butter</h1>
+        </div>
+        <div className="col-4">
+          <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
+          {sideList('left')}
+          </Drawer>
+        </div>
       </div>
     </div>
   );
@@ -62,5 +62,5 @@ const Button = styled.button`
   background: transparent;
   border: none;
   padding-left: 20px;
-  
+  padding-top: 4px;
 `
