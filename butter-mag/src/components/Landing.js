@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import News from './NewsSnip';
 
 export class Landing extends Component {
     render() {
@@ -9,7 +10,7 @@ export class Landing extends Component {
                     <Categories>
                         <h4>News</h4>
                         <Content>
-                            
+                            <News />
                         </Content>
                     </Categories>
                     <Categories>
@@ -32,9 +33,17 @@ export class Landing extends Component {
 export default Landing
 
 const Categories = styled.div`
-    height: 25vh;
     border-bottom: solid 1px #C0C0C0;
+    overflow-y: hidden;
 `
 const Content = styled.div`
     margin: 10px 5px 0px 5px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+        display: none;
+      }
+
 `
