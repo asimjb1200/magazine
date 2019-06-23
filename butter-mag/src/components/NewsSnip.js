@@ -7,15 +7,13 @@ export class NewsSnip extends Component {
         return (
             <Wrapper>
             <div className="card shadow-sm">
-                  <img class="card-img-top" src="..." alt="Card cap" />
+                  <img class="card-img-top" src="https://vignette.wikia.nocookie.net/battlefield/images/7/7f/Police_charger.jpg/revision/latest?cb=20140608235250" alt="Card cap" />
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
             </div>
             </Wrapper>
-            
-
         )
     }
 }
@@ -27,7 +25,7 @@ const Wrapper = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     display: inline-block!important;
-    width: 18rem;
+    width: 15rem;
     margin-right: 10px;
     margin-bottom: 10px;
 }

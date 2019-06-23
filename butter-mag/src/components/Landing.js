@@ -14,7 +14,7 @@ export class Landing extends Component {
                         </Content>
                     </Categories>
                     <Categories>
-                        <h4>News</h4>
+                        <h4>Entertainment</h4>
                         <Content>content</Content>
                     </Categories>
                     <Categories>
