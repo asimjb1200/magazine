@@ -8,18 +8,21 @@ export class Landing extends Component {
         return (
             <div class="container-fluid">
                 <br></br>
+                
+                
                     <Categories>
                         <h4>News</h4>
                         <Content>
-                            <ArticleConsumer>
+                        <ArticleConsumer>
                                 {(data) => {
                                     return data.news.map( story => {
                                         return <News key={story.id} article={story} />
                                     });
                                 }}
-                            </ArticleConsumer>
+                        </ArticleConsumer>
                         </Content>
                     </Categories>
+                    
                     <Categories>
                         <h4>Entertainment</h4>
                         <Content>content</Content>
@@ -52,5 +55,6 @@ const Content = styled.div`
     &::-webkit-scrollbar {
         display: none;
       }
+    
 
 `

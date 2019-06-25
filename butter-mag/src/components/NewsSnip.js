@@ -7,20 +7,27 @@ export class NewsSnip extends Component {
     render() {
         const {images, headline, content} = this.props.article;
         return (
-            <Wrapper>
+
+            
+
                 <ArticleConsumer>
+                
                     {(data) => (
                         <div className="card shadow-sm">
                         <img class="card-img-top" src={images} alt="Card cap" />
+                            
                             <div class="card-body">
                                 <h5 class="card-title">{headline}</h5>
                                 <p class="card-text">{content}</p>
                             </div>
                         </div>
-                    )
+                        )
                     }
+                    
                 </ArticleConsumer>
-            </Wrapper>
+
+            
+
         )
     }
 }
@@ -32,7 +39,7 @@ const Wrapper = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     display: inline-block!important;
-    width: 15rem;
+    width: 13rem;
     margin-right: 10px;
     margin-bottom: 10px;
 }
