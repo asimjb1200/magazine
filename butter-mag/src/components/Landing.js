@@ -45,6 +45,8 @@ export default Landing
 const Categories = styled.div`
     border-bottom: solid 1px #C0C0C0;
     overflow-y: hidden;
+    font-family: Raleway;
+    font-weight: bold;
 `
 const Content = styled.div`
     margin: 10px 5px 0px 5px;

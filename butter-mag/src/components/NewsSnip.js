@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+
 import {Link} from 'react-router-dom';
 import {ArticleConsumer} from '../context';
 
@@ -13,7 +13,7 @@ export class NewsSnip extends Component {
                 <ArticleConsumer>
                 
                     {(data) => (
-                        <div className="card shadow-sm">
+                        <div className="card ">
                         <img class="card-img-top" src={images} alt="Card cap" />
                             
                             <div class="card-body">
@@ -34,18 +34,3 @@ export class NewsSnip extends Component {
 
 export default NewsSnip;
 
-const Wrapper = styled.div`
-.card {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: inline-block!important;
-    width: 13rem;
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-.card-img-top {
-    width: 100%;
-    height: 30vw;
-    object-fit: cover;
-}
-`

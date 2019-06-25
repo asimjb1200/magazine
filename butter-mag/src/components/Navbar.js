@@ -43,10 +43,10 @@ export default function Navbar() {
     <div className="navigation">
       <div className="row">
         <div className="col-4">
-          <Button className="fas fa-bars fa-3x text-white"  onClick={toggleDrawer('left', true)}>&nbsp;</Button>
+          <Button className="fas fa-bars fa-3x" style={{color: 'gold'}}  onClick={toggleDrawer('left', true)}>&nbsp;</Button>
         </div>
         <div className="col-4">
-          <h1 className="logo-text text-center">Butter</h1>
+          <h1 className="logo-text text-center" style={{fontFamily: 'Pacifico', color: 'gold'}}>Butter</h1>
         </div>
         <div className="col-4">
           <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
