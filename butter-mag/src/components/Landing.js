@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import News from './NewsSnip';
+import {ArticleConsumer} from '../context';
 
 export class Landing extends Component {
     render() {
@@ -10,7 +11,13 @@ export class Landing extends Component {
                     <Categories>
                         <h4>News</h4>
                         <Content>
-                            <News />
+                            <ArticleConsumer>
+                                {(data) => {
+                                    return data.news.map( story => {
+                                        return <News key={story.id} article={story} />
+                                    });
+                                }}
+                            </ArticleConsumer>
                         </Content>
                     </Categories>
                     <Categories>

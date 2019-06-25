@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import {ArticleConsumer} from '../context';
 
 export class NewsSnip extends Component {
     render() {
+        const {images, headline, content} = this.props.article;
         return (
             <Wrapper>
-            <div className="card shadow-sm">
-                  <img class="card-img-top" src="https://vignette.wikia.nocookie.net/battlefield/images/7/7f/Police_charger.jpg/revision/latest?cb=20140608235250" alt="Card cap" />
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-            </div>
+                <ArticleConsumer>
+                    {(data) => (
+                        <div className="card shadow-sm">
+                        <img class="card-img-top" src={images} alt="Card cap" />
+                            <div class="card-body">
+                                <h5 class="card-title">{headline}</h5>
+                                <p class="card-text">{content}</p>
+                            </div>
+                        </div>
+                    )
+                    }
+                </ArticleConsumer>
             </Wrapper>
         )
     }
