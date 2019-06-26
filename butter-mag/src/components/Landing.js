@@ -8,8 +8,6 @@ export class Landing extends Component {
         return (
             <div class="container-fluid">
                 <br></br>
-                
-                
                     <Categories>
                         <h4>News</h4>
                         <Content>

@@ -25,3 +25,12 @@ export const Articles =[
         content: 'Testing out my very first context api',
     }
 ]
+
+export const storyDetails = {
+    id: 1,
+    date: '01-22-2019',
+    author: 'Asim',
+    headline: 'Third React App',
+    images: snippet,
+    content: 'Testing out my very first context api',
+}

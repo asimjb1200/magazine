@@ -4,6 +4,7 @@ import {Switch, Route} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import Landing from './components/Landing';
+import Details from './components/Details';
 
 class App extends Component {
   render () {
@@ -12,6 +13,7 @@ class App extends Component {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Landing} />
+          <Route exact path="/details" component={Details} />
         </Switch>
       </React.Fragment>
     )
