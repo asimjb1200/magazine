@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import News from './NewsSnip';
 import {ArticleConsumer} from '../context';
+import { func } from 'prop-types';
 
 export class Landing extends Component {
     constructor() {
@@ -15,12 +16,38 @@ export class Landing extends Component {
     //make ajax calls here
     componentDidMount() {
         console.log('component has mounted');
+        var that = this;
         //set up the GET request so that we can pull in data as soon as components load
         fetch('http://localhost:3001/api/articles')
             .then(function(response) {
                 response.json()
                     .then(function(data) {
-                        console.log(data);
+                        that.setState({
+                            newsArticles: data
+                        })
+                    })
+            })
+    }
+
+    removeStory(id) {
+        var that = this;
+        let stories = this.state.newsArticles;
+        let story = stories.find(function(story) {
+            return story.id === id;
+        });
+        
+        var request = new Request('http://localhost:3001/api/remove/' + id, {
+        method: 'DELETE'
+        });
+
+        fetch(request)
+            .then(function(response) {
+                stories.splice(stories.indexOf(story), 1); // remove that specific one from the array
+                that.setState({
+                    newsArticles: stories
+                })
+                response.json()
+                    .then(function(data) {
                     })
             })
     }
@@ -67,6 +94,7 @@ export class Landing extends Component {
 
     render() {
         let title = this.state.title;
+        let articles = this.state.newsArticles;
         return (
             <div class="container-fluid">
                 <br></br>
@@ -82,6 +110,9 @@ export class Landing extends Component {
                 <input type="text" ref="author" placeholder="Enter Author" />
                 <button onClick={this.addStory.bind(this)}>Add Article</button>
             </form>
+            <ul>
+                {articles.map( story => <li key={story.id}>{story.headline} - {story.id}<button onClick={this.removeStory.bind(this, story.id)}>Remove</button></li>)}
+            </ul>
                 </div>
                     <Categories>
                         <h4>News</h4>
