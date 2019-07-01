@@ -9,7 +9,7 @@ export class NewsSnip extends Component {
                 <ArticleConsumer>             
                     {(data) => (
                         <Link to="/details">
-                        <div className="card" onClick={() => data.handleDetail(id)}>
+                        <div className="card shadow" onClick={() => data.handleDetail(id)}>
                         <img class="card-img-top" src={images} alt="Card cap" />
                             <div class="card-body">
                                 <h5 class="card-title">{headline}</h5>
