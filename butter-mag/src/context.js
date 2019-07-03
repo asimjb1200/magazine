@@ -11,34 +11,56 @@ class ArticleProvider extends Component {
         storyDetails: storyDetails, 
     };
 
-    //get the articles from the data file to the news array for usage later
-    setArticles = () => {
-        let newsCopies = [];
-        Articles.forEach(story =>{
-            const singleArticle = {...story} //copy each story from the data set one by one
-            newsCopies = [...newsCopies, singleArticle]; //hold all of the copied articles
-        })
-        this.setState(() =>{
-            return {news: newsCopies}//now the original articles are safe from tampering when we display them to the web since they've been copied
-        })
+    //make ajax calls here
+    componentDidMount() {
+        console.log('component has mounted');
+        var that = this;
+        //set up the GET request so that we can pull in data as soon as components load
+         fetch('http://localhost:3001/api/news-articles')
+             .then(function(response) {
+                 response.json()
+                     .then(function(data) {
+                         that.setState({
+                             news: data
+                         })
+                     })
+             })
     }
 
-    //define a function that will pull in a specific article by it's id
-    getArticle = (id) => {
-        const story = this.state.news.find(story => story.id === id);
+    removeStory(id) {
+        var that = this;
+        let stories = this.state.newsArticles;
+        let story = stories.find(function(story) {
+            return story.id === id;
+        });
+        
+        var request = new Request('http://localhost:3001/api/remove/' + id, {
+        method: 'DELETE'
+        });
+
+        fetch(request)
+            .then(function(response) {
+                stories.splice(stories.indexOf(story), 1); // remove that specific one from the array
+                that.setState({
+                    newsArticles: stories
+                })
+                response.json()
+                    .then(function(data) {
+                    })
+            })
+    }
+
+    getStory(id) {
+        //only return the item who's id matches the one that was passed in
+        const story = this.state.news.find(item => item.id === id);
         return story;
     }
 
-    handleDetail = (id) => {
-        const story = this.getArticle(id);
+    handleDetail(id) {
+        const story = this.getStory(id);
         this.setState(() =>{
-            return {storyDetails: story}//set the story being viewed to the one that was clicked
+            return {storyDetails: story}
         })
-
-    }
-
-    componentDidMount() {
-        this.setArticles();
     }
 
     render() {

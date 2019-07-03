@@ -4,16 +4,16 @@ import {ArticleConsumer} from '../context';
 
 export class NewsSnip extends Component {
     render() {
-        const {id, images, headline, content} = this.props.article;
+        const {id, imagePath, headline, snippet} = this.props.article;
         return (
                 <ArticleConsumer>             
                     {(data) => (
                         <Link to="/details">
                         <div className="card shadow" onClick={() => data.handleDetail(id)}>
-                        <img class="card-img-top" src={images} alt="Card cap" />
+                        <img class="card-img-top" src={imagePath} alt="Card cap" />
                             <div class="card-body">
                                 <h5 class="card-title">{headline}</h5>
-                                <p class="card-text">{content}</p>
+                                <p class="card-text">{snippet}</p>
                             </div>
                         </div>
                         </Link>

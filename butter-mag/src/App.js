@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Landing from './components/Landing';
 import Details from './components/Details';
 import AllNews from './components/AllNews';
+import AddStories from './components/AddStories';
 
 class App extends Component {
   render () {
@@ -16,6 +17,7 @@ class App extends Component {
           <Route exact path="/" component={Landing} />
           <Route exact path="/details" component={Details} />
           <Route exact path="/all-news" component={AllNews} />
+          <Route exact path="/add-stories" component={AddStories} />
         </Switch>
       </React.Fragment>
     )

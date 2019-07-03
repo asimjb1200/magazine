@@ -7,7 +7,7 @@ export class Details extends Component {
         return (
             <ArticleConsumer>
                 {(data)=> {
-                    const {id, images, author, date, headline, content} = data.storyDetails;
+                    const {id, images, author, date, headline, content} = data.handleDetails;
                     return (
                         <div>
                             {headline}

@@ -52,8 +52,8 @@ app.use(function(req, res, next) {
     next();
 });
 
-//set up the api for GET requests
-app.get('/api/articles', function(request, response) {
+//set up the api for GET requests for news articles
+app.get('/api/news-articles', function(request, response) {
     pool.connect(function(err, db, done) {
         if(err) {
             return response.status(400).send(err);
@@ -88,24 +88,26 @@ app.delete('/api/remove/:id', function(request, response) {
 })
 
 //set up the api for posting to db
-app.post('/api/new-article', function(request, response) {
-    //console.log(request.body);
-    var headline = request.body.headline;
-    var date = request.body.date;
-    var content = request.body.content;
-    var images = request.body.images;
+app.post('/api/add-news', function(request, response) {
+    console.log(request.body);
     var id = request.body.id;
+    var headline = request.body.headline;
     var snippet = request.body.snippet;
+    var content = request.body.content;
+    var images = request.body.imagePath;
+    var date = request.body.date;
     var author = request.body.author;
-    let values = [headline, date, content, images, id, snippet, author];
+    var category = request.body.category;
+    let values = [id, headline, snippet, content, images, date, author, category];
 
     pool.connect((err, db, done) => {
      if(err) {
          return response.status(400).send(err);
      } else {
-         db.query('INSERT INTO news (headline, date, content, images, id, snippet, author) VALUES($1, $2, $3, $4, $5, $6, $7)',[...values], (err, table) => {
+         db.query('INSERT INTO news (id, headline, snippet, content, "imagePath", date, author, category) VALUES($1, $2, $3, $4, $5, $6, $7, $8)',[...values], (err, table) => {
              done();
              if (err) {
+                 console.log(err);
                  return response.status(400).send(err);
              } else {
                  return response.status(201).send(`Data Inserted`);
