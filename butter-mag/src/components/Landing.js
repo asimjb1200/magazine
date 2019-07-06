@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import News from './NewsSnip';
 import {ArticleConsumer} from '../context';
+import {Link} from 'react-router-dom';
 import { func } from 'prop-types';
 
 export class Landing extends Component {
@@ -9,7 +10,9 @@ export class Landing extends Component {
         return (
             <div className="container-fluid">
                     <Categories>
-                        <h4>News</h4>
+                        <Link to="/all-news" style={{textDecoration: 'none', color: 'black'}}>
+                        <h4>News - <small className="text-muted">see all</small></h4>
+                        </Link>
                         <Content>
                         <ArticleConsumer>
                                 {(data) => {

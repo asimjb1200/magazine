@@ -47,7 +47,7 @@ export default function Navbar() {
           <Button className="fas fa-bars fa-3x" style={{color: 'gold'}}  onClick={toggleDrawer('left', true)}>&nbsp;</Button>
         </div>
         <div className="col-4">
-          <Link to="/">
+          <Link to="/" style={{textDecoration: 'none'}}>
           <h1 className="logo-text text-center" style={{fontFamily: 'Lobster', color: 'gold'}}>Butter</h1>
           </Link>
         </div>

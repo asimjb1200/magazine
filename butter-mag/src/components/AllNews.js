@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
 import { ArticleConsumer } from '../context';
+import {Link} from 'react-router-dom';
 
 export class AllNews extends Component {
     render() {
@@ -8,14 +9,15 @@ export class AllNews extends Component {
             <div>
                 <h1 className="text-center" style={{fontFamily: 'Lobster'}}>All News</h1>
                 <ArticleConsumer>
-                    
                     {(stories) => {
                         return stories.news.map(story => {
                             return (
-                                <Stories>
+                                <Link to="/details" style={{textDecoration: 'none', color: 'black'}} key={story.id}>
+                                <Stories  onClick={() => stories.handleDetail(story.id)}>
                                 <h2>{story.headline}</h2>
                                 <p className="text-muted">{story.snippet}</p>
                                 </Stories>
+                                </Link>
                             )
                         })
                     }}
