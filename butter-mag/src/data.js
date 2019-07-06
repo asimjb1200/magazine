@@ -1,5 +1,6 @@
 
 export const storyDetails = {
+    id: 1,
     headline: 'Third React App',
     snippet: 'snippet here',
     content: 'Testing out my very first context api',

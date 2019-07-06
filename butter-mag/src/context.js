@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Articles, storyDetails} from './data';
+import { storyDetails } from './data';
 
 const SiteData = React.createContext();
 
@@ -13,7 +13,13 @@ class ArticleProvider extends Component {
 
     //make ajax calls here
     componentDidMount() {
-        console.log('component has mounted');
+        // add event listener to save state to localStorage
+        // when user leaves/refreshes the page
+        this.hydrateStateWithLocalStorage();
+        window.addEventListener(
+            "beforeunload",
+            this.saveStateToLocalStorage.bind(this)
+          );
         var that = this;
         //set up the GET request so that we can pull in data as soon as components load
          fetch('http://localhost:3001/api/news-articles')
@@ -25,9 +31,48 @@ class ArticleProvider extends Component {
                          })
                      })
              })
+
     }
 
-    removeStory(id) {
+    componentWillUnmount() {
+        window.removeEventListener(
+          "beforeunload",
+          this.saveStateToLocalStorage.bind(this)
+        );
+    
+        // saves if component has a chance to unmount
+        this.saveStateToLocalStorage();
+      }
+    
+      hydrateStateWithLocalStorage() {
+        // for all items in state
+        for (let key in this.state) {
+          // if the key exists in localStorage
+          if (localStorage.hasOwnProperty(key)) {
+            // get the key's value from localStorage
+            let value = localStorage.getItem(key);
+    
+            // parse the localStorage string and setState
+            try {
+              value = JSON.parse(value);
+              this.setState({ [key]: value });
+            } catch (e) {
+              // handle empty string
+              this.setState({ [key]: value });
+            }
+          }
+        }
+      }
+    
+      saveStateToLocalStorage() {
+        // for every item in React state
+        for (let key in this.state) {
+          // save to localStorage
+          localStorage.setItem(key, JSON.stringify(this.state[key]));
+        }
+      }
+
+    removeStory = (id) => {
         var that = this;
         let stories = this.state.newsArticles;
         let story = stories.find(function(story) {
@@ -50,13 +95,13 @@ class ArticleProvider extends Component {
             })
     }
 
-    getStory(id) {
+    getStory = (id) => {
         //only return the item who's id matches the one that was passed in
         const story = this.state.news.find(item => item.id === id);
         return story;
     }
 
-    handleDetail(id) {
+    handleDetail = (id) => {
         const story = this.getStory(id);
         this.setState(() =>{
             return {storyDetails: story}

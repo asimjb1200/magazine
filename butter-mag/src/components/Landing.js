@@ -5,9 +5,7 @@ import {ArticleConsumer} from '../context';
 import { func } from 'prop-types';
 
 export class Landing extends Component {
-
     render() {
-
         return (
             <div className="container-fluid">
                     <Categories>
@@ -15,9 +13,7 @@ export class Landing extends Component {
                         <Content>
                         <ArticleConsumer>
                                 {(data) => {
-                                    
                                     return data.news.map(story => {
-                                        console.log(story);
                                         return <News key={story.id} article={story} />
                                     });
                                 }}
@@ -61,6 +57,4 @@ const Content = styled.div`
     &::-webkit-scrollbar {
         display: none;
       }
-    
-
 `

@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import {Link} from 'react-router-dom';
 import Drawer from '@material-ui/core/Drawer';
 import styled from 'styled-components';
 import List from '@material-ui/core/List';
@@ -46,7 +47,9 @@ export default function Navbar() {
           <Button className="fas fa-bars fa-3x" style={{color: 'gold'}}  onClick={toggleDrawer('left', true)}>&nbsp;</Button>
         </div>
         <div className="col-4">
-          <h1 className="logo-text text-center" style={{fontFamily: 'Pacifico', color: 'gold'}}>Butter</h1>
+          <Link to="/">
+          <h1 className="logo-text text-center" style={{fontFamily: 'Lobster', color: 'gold'}}>Butter</h1>
+          </Link>
         </div>
         <div className="col-4">
           <Drawer open={state.left} onClose={toggleDrawer('left', false)}>

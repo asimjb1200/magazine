@@ -3,19 +3,22 @@ import {ArticleConsumer} from '../context';
 
 
 export class Details extends Component {
+    
     render() {
         return (
             <ArticleConsumer>
                 {(data)=> {
-                    const {id, images, author, date, headline, content} = data.handleDetails;
+                    const {id, images, author, date, headline, content} = data.storyDetails;
+                    
                     return (
-                        <div>
+                        <div className="container-fluid">
                             {headline}
                         </div>
                     )
                 }}
             </ArticleConsumer>
         )
+        
     }
 }
 
