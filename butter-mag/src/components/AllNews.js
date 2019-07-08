@@ -13,10 +13,16 @@ export class AllNews extends Component {
                         return stories.news.map(story => {
                             return (
                                 <Link to="/details" style={{textDecoration: 'none', color: 'black'}} key={story.id}>
-                                <Stories  onClick={() => stories.handleDetail(story.id)}>
-                                <h2>{story.headline}</h2>
-                                <p className="text-muted">{story.snippet}</p>
-                                </Stories>
+                                <div className="row wrapper" style={{height: '20vh', borderBottom: 'solid 1px #C0C0C0', fontFamily: 'Raleway'}}>
+                                    <div className="col-7" onClick={() => stories.handleDetail(story.id)}>
+                                        <h4>{story.headline}</h4>
+                                        <p className="text-muted" >{story.snippet}</p>
+                                        <p className="text-muted text-truncate"><strong>{story.content}</strong></p>
+                                    </div>
+                                    <div className="img-wrapper col-5">
+                                        <img src={story.imagePath} alt="story"  style={{ height: '15vh', width: '30vw'}}/>
+                                    </div>
+                                </div>
                                 </Link>
                             )
                         })
@@ -29,9 +35,3 @@ export class AllNews extends Component {
 
 export default AllNews;
 
-const Stories = styled.div`
-    border-bottom: solid 1px #C0C0C0;
-    font-family: Raleway;
-    font-weight: bold;
-    padding-left: 15px;
-`
