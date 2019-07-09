@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import News from './NewsSnip';
 import {ArticleConsumer} from '../context';
 import {Link} from 'react-router-dom';
-import { func } from 'prop-types';
 
 export class Landing extends Component {
     render() {
