@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import News from './NewsSnip';
+import Sports from './SportSnip';
 import {ArticleConsumer} from '../context';
 import {Link} from 'react-router-dom';
 
@@ -14,11 +15,11 @@ export class Landing extends Component {
                         </Link>
                         <Content>
                         <ArticleConsumer>
-                                {(data) => {
-                                    return data.news.map(story => {
-                                        return <News key={story.id} article={story} />
-                                    });
-                                }}
+                            {(data) => {
+                                return data.news.map(story => {
+                                    return <News key={story.id} article={story} />
+                                });
+                            }}
                         </ArticleConsumer>
                         </Content>
                     </Categories>
@@ -26,7 +27,13 @@ export class Landing extends Component {
                     <Categories>
                         <h4>Sports</h4>
                         <Content>
-
+                        <ArticleConsumer>
+                            {(data) => {
+                                return data.sports.map(story => {
+                                    return <Sports key={story.id} article={story} />
+                                });
+                            }}
+                        </ArticleConsumer>
                         </Content>
                     </Categories>
                     <Categories>
