@@ -52,6 +52,8 @@ app.use(function(req, res, next) {
     next();
 });
 
+//************************************************NEWS */
+
 //set up the api for GET requests for news articles
 app.get('/api/news-articles', function(request, response) {
     pool.connect(function(err, db, done) {
@@ -119,6 +121,57 @@ app.post('/api/add-news', function(request, response) {
  })
 
 
+})
+
+//************************************************SPORTS ************************************************************************************8*/
+//set up the api for GET requests for sports articles
+app.get('/api/sports-articles', function(request, response) {
+    pool.connect(function(err, db, done) {
+        if(err) {
+            return response.status(400).send(err);
+        } else {
+            db.query('SELECT * FROM sports', function(err, table) {
+                done();
+                if(err) {
+                    return response.status(400).send(err);
+                } else {
+                    return response.status(200).send(table.rows);
+                }
+            })
+        }
+    })
+})
+
+//set up the api for posting to sports
+app.post('/api/add-sports', function(request, response) {
+    console.log(request.body);
+    var id = request.body.id;
+    var date = request.body.date;
+    var author = request.body.author;
+    var sport = request.body.sport;
+    var videoPath = request.body.videoPath;
+    var home = request.body.home;
+    var away = request.body.away;
+    var headline = request.body.headline;
+    var content = request.body.content;
+    let values = [id, date, author, sport, videoPath, home, away, headline, content];
+
+    pool.connect((err, db, done) => {
+     if(err) {
+         return response.status(400).send(err);
+     } else {
+         db.query('INSERT INTO sports (id, date, author, sport, "videoPath", home, away, headline, content) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)',[...values], (err, table) => {
+             done();
+             if (err) {
+                 console.log(err);
+                 return response.status(400).send(err);
+             } else {
+                 return response.status(201).send(`Data Inserted`);
+                // db.end();
+             }
+         })
+     }
+    })
 })
 
 app.listen(PORT, () => console.log('Listening on port ' + PORT));

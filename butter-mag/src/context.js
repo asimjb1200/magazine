@@ -8,6 +8,7 @@ class ArticleProvider extends Component {
         news: [],
         entertainment: [],
         interviews: [],
+        sports: [],
         storyDetails: storyDetails, 
     };
 
@@ -28,6 +29,16 @@ class ArticleProvider extends Component {
                      .then(function(data) {
                          that.setState({
                              news: data
+                         })
+                     })
+             })
+
+             fetch('http://localhost:3001/api/sports-articles')
+             .then(function(response) {
+                 response.json()
+                     .then(function(data) {
+                         that.setState({
+                             sports: data
                          })
                      })
              })

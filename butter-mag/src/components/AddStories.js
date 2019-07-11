@@ -42,13 +42,55 @@ export class AddStories extends Component {
              })
     }
 
+    addSports(event) {
+        event.preventDefault();
+        let data = {
+            id: this.refs.id.value,
+            date: this.refs.date.value,
+            author: this.refs.author.value,
+            sport: this.refs.sport.value,
+            videoPath: this.refs.videoPath.value,
+            home: this.refs.home.value,
+            away: this.refs.away.value,
+            headline: this.refs.headline.value,
+            content: this.refs.content.value,
+        };
+        
+        //start the connection to send data to db via api
+        var request = new Request('http://localhost:3001/api/add-sports', {
+            method: 'POST',
+            headers: new Headers({'Content-Type': 'application/json' }),
+            body: JSON.stringify(data)
+        });
+
+        // let stories = that.state.newsArticles;
+        // stories.push(data);
+        // console.log(stories)
+        // that.setState({
+        //     newsArticles: stories
+        // })
+
+         //xmlhttprequest()
+         fetch(request)
+             .then(function(response) {
+                 response.json()
+                     .then(function(data) {
+
+                     })
+             })
+             .catch(function(err) {
+                console.log(err);
+             })
+             alert('Article Posted');
+    }
+
     render() {
         return (
             <div class="container-fluid">
-            <h4>Add a news article</h4>
+            <h4>Add a News Article</h4>
             <form ref="articleForm">
                 <div className="form-group">
-                    <label for="id">Enter article id</label>
+                    <label for="id">Enter ID</label>
                     <input id="id" type="number" className="form-control" ref="id" />
                 </div>  
                 <div className="form-group">
@@ -60,15 +102,71 @@ export class AddStories extends Component {
                     <input id="snippet" type="text" className="form-control" ref="snippet" />
                 </div>
                 <div className="form-group">
-                    <label for="content">Enter article content here</label>
+                    <label for="content">Enter Content</label>
                     <textarea id="content" rows="5" className="form-control"  type="text" ref="content" />
+                </div>              
+                <div className="form-group">
+                    <label for="path">Enter Image Path</label>
+                    <input id="path" type="text" className="form-control"  ref="imagePath" />
                 </div>
-                
-                <input type="text" className="form-control"  ref="imagePath" placeholder="Enter Image Path" />
-                <input type="date" className="form-control" ref="date" placeholder="Enter Date" />
-                <input type="text" className="form-control" ref="author" placeholder="Enter Author" />
-                <input type="text" className="form-control" ref="category" placeholder="Enter article's category" />
+                <div className="form-group">
+                    <label for="date">Enter Date</label>
+                    <input id="date" type="date" className="form-control" ref="date" />
+                </div>
+                <div className="form-group">
+                    <label for="author">Enter Author</label>
+                    <input id="author" type="text" className="form-control" ref="author" />
+                </div>
+                <div className="form-group">
+                    <label for="category">Article's Category</label>
+                    <input id="category" type="text" className="form-control" ref="category" />
+                </div>
                 <button className="btn btn-outline-success" onClick={this.addStory.bind(this)}>Add Article</button>
+            </form>
+            <hr/>
+            <br/>
+            <br/>
+
+            <h4>Add a Sports Article</h4>
+            <form ref="articleForm">
+                <div className="form-group">
+                    <label for="sport-id">Enter ID</label>
+                    <input id="sport-id" type="number" className="form-control" ref="id" />
+                </div>  
+                <div className="form-group">
+                    <label for="sport-date">Enter Date</label>
+                    <input id="sport-date" type="date" className="form-control" ref="date" />
+                </div>
+                <div className="form-group">
+                    <label for="sport-author">Enter Author</label>
+                    <input id="sport-author" type="text" className="form-control" ref="author" />
+                </div>
+                <div className="form-group">
+                    <label for="sport">Enter Sport Played</label>
+                    <input id="sport" type="text" className="form-control" ref="sport" />
+                </div>
+                <div className="form-group">
+                    <label for="sport-path">Enter Video Path</label>
+                    <input id="sport-path" type="text" className="form-control"  ref="videoPath" />
+                </div>
+                <div className="form-group">
+                    <label for="home">Enter Home Team</label>
+                    <input id="home" type="text" className="form-control"  ref="home" />
+                </div>
+                <div className="form-group">
+                    <label for="away">Enter Away Team</label>
+                    <input id="away" type="text" className="form-control"  ref="away" />
+                </div>
+                <div className="form-group">
+                    <label for="sport-headline">Enter Headline</label>
+                    <input id="sport-headline" type="text" className="form-control" ref="headline" />
+                </div>
+                <div className="form-group">
+                    <label for="sport-content">Enter Content</label>
+                    <textarea id="sport-content" rows="5" className="form-control"  type="text" ref="content" />
+                </div>              
+
+                <button className="btn btn-outline-success" onClick={this.addSports.bind(this)}>Add Article</button>
             </form>
         </div>
         )
