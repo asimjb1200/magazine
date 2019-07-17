@@ -8,9 +8,9 @@ export class SportSnip extends Component {
         const sportDate = date.substring(0, 10);
         
         return (
-            <div className="card" style={{width: '20rem', height: '15rem', backgroundColor: 'gold', fontFamily: 'Pacifico'}}>
+            <div className="card" style={{width: '20rem', height: '15rem', backgroundColor: 'gold', fontFamily: 'Lobster'}}>
                 <div className="card-header ">{sport}</div>
-                <ul className="list-group list-group-flush text-center" >
+                <ul className="list-group list-group-flush text-center" style={{letterSpacing: '4px'}}>
                     <li className="list-group-item" style={{color: 'gold', backgroundColor: 'black'}}>{home}</li>
                     <li className="list-group-item" style={{color: 'gold', backgroundColor: 'black'}}>VS</li>
                     <li className="list-group-item" style={{color: 'gold', backgroundColor: 'black'}}>{away}</li>

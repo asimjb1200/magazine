@@ -54,7 +54,7 @@ app.use(function(req, res, next) {
 
 //************************************************NEWS */
 
-//set up the api for GET requests for news articles
+//set up the api for GET requests for all news articles
 app.get('/api/news-articles', function(request, response) {
     pool.connect(function(err, db, done) {
         if(err) {
@@ -66,6 +66,26 @@ app.get('/api/news-articles', function(request, response) {
                     return response.status(400).send(err);
                 } else {
                     return response.status(200).send(table.rows);
+                }
+            })
+        }
+    })
+})
+
+/* API call to get a single news article*/
+app.get('/api/news/:id', function(request, response) {
+    var id = request.params.id;
+    pool.connect(function(err, db, done) {
+        if(err) {
+            return response.status(400).send(err);
+        } else {
+            db.query('SELECT * FROM news WHERE id =$1', [id], function(err, table) {
+                done();
+                if(err) {
+                    return response.status(400).send(err);
+                } else {
+                    console.log(table.rows[0]);
+                    return response.status(200).send(table.rows[0]);
                 }
             })
         }

@@ -9,11 +9,12 @@ class ArticleProvider extends Component {
         entertainment: [],
         interviews: [],
         sports: [],
-        storyDetails: storyDetails, 
+        //storyDetails: null, 
     };
 
     //make ajax calls here
     componentDidMount() {
+        
         // add event listener to save state to localStorage
         // when user leaves/refreshes the page
         this.hydrateStateWithLocalStorage();
@@ -106,10 +107,20 @@ class ArticleProvider extends Component {
             })
     }
 
-    getStory = (id) => {
+    //getStory = (id) => {
         //only return the item who's id matches the one that was passed in
-        const story = this.state.news.find(item => item.id === id);
-        return story;
+    //    const story = this.state.news.find(item => item.id === id);
+    //    return story;
+    //}
+
+    getStory = (id) => {
+        var request = new Request('http://localhost:3001/api/news/' + id, {
+            method: 'GET'
+            });
+        fetch(request)
+            .then(function(response) {
+                return response.json()
+            })
     }
 
     handleDetail = (id) => {

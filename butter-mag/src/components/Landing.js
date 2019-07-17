@@ -9,6 +9,7 @@ export class Landing extends Component {
     render() {
         return (
             <div className="container-fluid">
+                <br />
                     <Categories>
                         <Link to="/all-news" style={{textDecoration: 'none', color: 'black'}}>
                         <h4>News - <small className="text-muted">see all</small></h4>
@@ -25,7 +26,7 @@ export class Landing extends Component {
                     </Categories>
                     
                     <Categories>
-                        <h4>Sports</h4>
+                        <h4>Sports - <small className="text-muted">see all</small></h4>
                         <Content>
                         <ArticleConsumer>
                             {(data) => {
