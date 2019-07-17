@@ -12,9 +12,9 @@ export class AllNews extends Component {
                     {(stories) => {
                         return stories.news.map(story => {
                             return (
-                                <Link to="/details" style={{textDecoration: 'none', color: 'black'}} key={story.id}>
+                                <Link to={`/details/${story.id}`} style={{textDecoration: 'none', color: 'black'}} key={story.id}>
                                 <div className="row wrapper" style={{height: '20vh', borderBottom: 'solid 1px #C0C0C0', fontFamily: 'Raleway'}}>
-                                    <div className="col-7" onClick={() => stories.handleDetail(story.id)}>
+                                    <div className="col-7" >
                                         <h4>{story.headline}</h4>
                                         <p className="text-muted">{story.snippet}</p>
                                         <p className="text-muted text-truncate"><strong>{story.content}</strong></p>

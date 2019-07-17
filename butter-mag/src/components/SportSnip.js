@@ -4,11 +4,11 @@ export class SportSnip extends Component {
     
     render() {
         const {id, sport, date, videoPath, home, away, headline} = this.props.article;
-        const VIDEO_ID = videoPath.substring(32);
+        //const VIDEO_ID = videoPath.substring(32);
         const sportDate = date.substring(0, 10);
         
         return (
-            <div className="card" style={{width: '20rem', height: '15rem', backgroundColor: 'gold', fontFamily: 'Lobster'}}>
+            <div className="card" style={{width: '20rem', height: '15rem', backgroundColor: 'gold', fontFamily: 'Lobster'}} key={id}>
                 <div className="card-header ">{sport}</div>
                 <ul className="list-group list-group-flush text-center" style={{letterSpacing: '4px'}}>
                     <li className="list-group-item" style={{color: 'gold', backgroundColor: 'black'}}>{home}</li>

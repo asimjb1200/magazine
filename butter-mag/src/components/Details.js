@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {ArticleConsumer} from '../context';
+
 
 
 export class Details extends Component {
@@ -22,6 +22,7 @@ export class Details extends Component {
             
             <div className="container-fluid">
                 {this.state.details.headline}
+                
             </div>   
         )
         
