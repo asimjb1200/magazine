@@ -26,7 +26,9 @@ export class Landing extends Component {
                     </Categories>
                     
                     <Categories>
+                    <Link to="/all-sports" style={{textDecoration: 'none', color: 'black'}}>
                         <h4>Sports - <small className="text-muted">see all</small></h4>
+                    </Link>
                         <Content>
                         <ArticleConsumer>
                             {(data) => {

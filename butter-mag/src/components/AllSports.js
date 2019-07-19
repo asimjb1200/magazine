@@ -11,11 +11,13 @@ export class AllSports extends Component {
                     {(stories) => {
                         return stories.sports.map((story) => {
                             var VIDEO_ID = story.videoPath.substring(32);
+                            var shortDate = story.date.substring(0, 10);
                             return (
-                                <div style={{width: '100%', height: '25%', margin: '0.5rem', padding: '10px', borderBottom: 'solid 2px #C0C0C0', fontFamily: 'Raleway'}}>
+                                <div style={{width: '100%', height: '25%', marginBottom: '0.5rem', paddingBottom: '10px', borderBottom: 'solid 1.2px #C0C0C0', fontFamily: 'Raleway'}} key={story.id}>
                                     <h5>{story.headline}</h5>
+                                    <span style={{float: 'right'}}>{shortDate}</span>
                                     <p className="text-muted">- read full story</p>
-                                    <div className="youtube-player card-img-top" data-id={VIDEO_ID} key={story.id}>
+                                    <div className="youtube-player card-img-top" data-id={VIDEO_ID} >
                                         
                                     </div>
                                     
