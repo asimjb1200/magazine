@@ -16,34 +16,9 @@ let pool = new pg.Pool({
     user: 'postgres'
 });
 
-// pool.connect((err, db, done) => {
-//     if(err) {
-//         return console.log(err);
-//     } else {
-//         var headline = 'Testing the database';
-//         var date = '2019-01-29';
-//         var author = 'Mike';
-//         var snippet = 'Testing our the postgres database I think i will like this magazine';
-//         var content = 'This will be where the main article is stored , on guard!';
-//         var images = 'This will store the images for the articles';
-//         var id = 2;
-
-//         db.query('SELECT * FROM news', (err, table) => {
-//             done();
-//             if (err) {
-//                 return console.log(err);
-//             } else {
-//                 console.log(table.rows[1].author);
-//                 db.end();
-//             }
-//         })
-//     }
-// })
-
 let app = express();// instantiate application
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
 app.use(morgan('dev'));
 app.use(cors());
 app.use(function(req, res, next) {
@@ -52,7 +27,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-//************************************************NEWS */
+//NEWS*************************************************/
 
 //set up the api for GET requests for all news articles
 app.get('/api/news-articles', function(request, response) {
@@ -143,8 +118,8 @@ app.post('/api/add-news', function(request, response) {
 
 })
 
-//************************************************SPORTS ************************************************************************************8*/
-//set up the api for GET requests for sports articles
+//SPORTS*************************************************************************************************************************************/
+//set up the api to get all sports articles
 app.get('/api/sports-articles', function(request, response) {
     pool.connect(function(err, db, done) {
         if(err) {
@@ -156,6 +131,26 @@ app.get('/api/sports-articles', function(request, response) {
                     return response.status(400).send(err);
                 } else {
                     return response.status(200).send(table.rows);
+                }
+            })
+        }
+    })
+})
+
+/* API call to get a single sports article*/
+app.get('/api/sports/:id', function(request, response) {
+    var id = request.params.id;
+    pool.connect(function(err, db, done) {
+        if(err) {
+            return response.status(400).send(err);
+        } else {
+            db.query('SELECT * FROM sports WHERE id =$1', [id], function(err, table) {
+                done();
+                if(err) {
+                    return response.status(400).send(err);
+                } else {
+                    console.log(table.rows[0]);
+                    return response.status(200).send(table.rows[0]);
                 }
             })
         }
@@ -194,5 +189,72 @@ app.post('/api/add-sports', function(request, response) {
     })
 })
 
-app.listen(PORT, () => console.log('Listening on port ' + PORT));
+//INTERVIEWS*************************************************************************************************************************************/
+//set up the api for posting to interview db
+app.post('/api/add-interview', function(request, response) {
+    console.log(request.body);
+    var id = request.body.id;
+    var date = request.body.date;
+    var poi = request.body.poi;
+    var category = request.body.category;
+    var videoPath = request.body.videoPath;
+    let values = [id, date, poi, category, videoPath];
 
+    pool.connect((err, db, done) => {
+     if(err) {
+         return response.status(400).send(err);
+     } else {
+         db.query('INSERT INTO interviews (id, date, poi, category, "videoPath") VALUES($1, $2, $3, $4, $5)',[...values], (err, table) => {
+             done();
+             if (err) {
+                 console.log(err);
+                 return response.status(400).send(err);
+             } else {
+                 return response.status(201).send(`Data Inserted`);
+                // db.end();
+             }
+         })
+     }
+    })
+})
+
+//set up the api to get all interviews
+app.get('/api/interviews', function(request, response) {
+    pool.connect(function(err, db, done) {
+        if(err) {
+            return response.status(400).send(err);
+        } else {
+            db.query('SELECT * FROM interviews', function(err, table) {
+                done();
+                if(err) {
+                    return response.status(400).send(err);
+                } else {
+                    return response.status(200).send(table.rows);
+                }
+            })
+        }
+    })
+})
+
+/* API call to get a single sports article*/
+app.get('/api/interview/:id', function(request, response) {
+    var id = request.params.id;
+    pool.connect(function(err, db, done) {
+        if(err) {
+            return response.status(400).send(err);
+        } else {
+            db.query('SELECT * FROM interviews WHERE id =$1', [id], function(err, table) {
+                done();
+                if(err) {
+                    return response.status(400).send(err);
+                } else {
+                    console.log(table.rows[0]);
+                    return response.status(200).send(table.rows[0]);
+                }
+            })
+        }
+    })
+})
+
+
+app.listen(PORT, () => console.log('Listening on port ' + PORT));
