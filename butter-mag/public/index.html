@@ -49,6 +49,7 @@
             for (n = 0; n < v.length; n++) {
                 div = document.createElement("div");
                 div.setAttribute("data-id", v[n].dataset.id);
+                
                 div.innerHTML = labnolThumb(v[n].dataset.id);
                 div.onclick = labnolIframe;
                 v[n].appendChild(div);

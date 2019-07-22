@@ -44,6 +44,16 @@ class ArticleProvider extends Component {
                      })
              })
 
+             fetch('http://localhost:3001/api/interviews')
+                .then(function(response) {
+                    response.json()
+                        .then(function(data) {
+                            that.setState({
+                                interviews: data
+                            })
+                        })
+                })
+
     }
 
     componentWillUnmount() {

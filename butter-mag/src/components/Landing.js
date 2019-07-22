@@ -4,6 +4,7 @@ import News from './NewsSnip';
 import Sports from './SportSnip';
 import {ArticleConsumer} from '../context';
 import {Link} from 'react-router-dom';
+import Interview from './Interview';
 
 export class Landing extends Component {
     render() {
@@ -40,8 +41,16 @@ export class Landing extends Component {
                         </Content>
                     </Categories>
                     <Categories>
-                        <h4>News</h4>
-                        <Content>content</Content>
+                        <h4>Interviews</h4>
+                        <Content>
+                        <ArticleConsumer>
+                            {(data) => {
+                                return data.interviews.map(story => {
+                                    return <Interview key={story.id} article={story} />
+                                })
+                            }}
+                        </ArticleConsumer>
+                        </Content>
                     </Categories>
                     <Categories>
                         <h4>News</h4>

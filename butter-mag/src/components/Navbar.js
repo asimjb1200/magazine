@@ -37,26 +37,30 @@ export default function Navbar() {
         <h2>News</h2>
       </List>
       <Divider />
+      <List>
+        <Link to="/add-stories">
+        <h2>Add Article</h2>
+        </Link>
+      </List>
+      <Divider />
     </div>
   );
 
   return (
     <div className="navigation">
-      <div className="row">
-        <div className="col-4">
+        <div style={{width: '33vw', display: 'inline-block'}}>
           <Button className="fas fa-bars fa-3x" style={{color: 'gold'}}  onClick={toggleDrawer('left', true)}>&nbsp;</Button>
         </div>
-        <div className="col-4">
+        <div className="text-center" style={{display: 'inline-block', width: '33vw'}}>
           <Link to="/" style={{textDecoration: 'none'}}>
-          <h1 className="logo-text text-center" style={{fontFamily: 'Lobster', color: 'gold'}}>Butter</h1>
+          <h1 style={{fontFamily: 'Lobster', color: 'gold'}}>Butter</h1>
           </Link>
         </div>
-        <div className="col-4">
+        <div >
           <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
           {sideList('left')}
           </Drawer>
         </div>
-      </div>
     </div>
   );
 }

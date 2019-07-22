@@ -22,13 +22,6 @@ export class AddStories extends Component {
             body: JSON.stringify(data)
         });
 
-        // let stories = that.state.newsArticles;
-        // stories.push(data);
-        // console.log(stories)
-        // that.setState({
-        //     newsArticles: stories
-        // })
-
          //xmlhttprequest()
          fetch(request)
              .then(function(response) {
@@ -63,13 +56,6 @@ export class AddStories extends Component {
             body: JSON.stringify(data)
         });
 
-        // let stories = that.state.newsArticles;
-        // stories.push(data);
-        // console.log(stories)
-        // that.setState({
-        //     newsArticles: stories
-        // })
-
          //xmlhttprequest()
          fetch(request)
              .then(function(response) {
@@ -84,6 +70,36 @@ export class AddStories extends Component {
              alert('Article Posted');
     }
 
+    addInterview(event) {
+        event.preventDefault();
+        let data = {
+            id: this.refs.id.value,
+            date: this.refs.date.value,
+            poi: this.refs.poi.value,
+            category: this.refs.category.value,
+            videoPath: this.refs.videoPath.value,
+        };
+        
+        //start the connection to send data to db via api
+        var request = new Request('http://localhost:3001/api/add-interview', {
+            method: 'POST',
+            headers: new Headers({'Content-Type': 'application/json' }),
+            body: JSON.stringify(data)
+        });
+
+         //xmlhttprequest()
+         fetch(request)
+             .then(function(response) {
+                 response.json()
+                     .then(function(data) {
+
+                     })
+             })
+             .catch(function(err) {
+                console.log(err);
+             })
+             alert('Article Posted');
+    }
     render() {
         return (
             <div class="container-fluid">
@@ -167,6 +183,33 @@ export class AddStories extends Component {
                 </div>              
 
                 <button className="btn btn-outline-success" onClick={this.addSports.bind(this)}>Add Article</button>
+            </form>
+            <hr/>
+            <br/>
+            <br/>
+            <h4>Add an Interview</h4>
+            <form ref="articleForm">
+                <div className="form-group">
+                    <label for="interview-id">Enter ID</label>
+                    <input id="interview-id" type="number" className="form-control" ref="id" />
+                </div>  
+                <div className="form-group">
+                    <label for="interview-date">Enter Date</label>
+                    <input id="interview-date" type="date" className="form-control" ref="date" />
+                </div>
+                <div className="form-group">
+                    <label for="poi">Enter Person of Interest</label>
+                    <input id="poi" type="text" className="form-control" ref="poi" />
+                </div>
+                <div className="form-group">
+                    <label for="interview-category">Enter Category</label>
+                    <input id="interview-category" type="text" className="form-control" ref="category" />
+                </div>
+                <div className="form-group">
+                    <label for="interview-path">Enter Video Path</label>
+                    <input id="interview-path" type="text" className="form-control"  ref="videoPath" />
+                </div>            
+                <button className="btn btn-outline-success" onClick={this.addInterview.bind(this)}>Add Article</button>
             </form>
         </div>
         )

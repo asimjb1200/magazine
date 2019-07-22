@@ -20,7 +20,6 @@ export class AllSports extends Component {
                                     <div className="youtube-player card-img-top" data-id={VIDEO_ID} >
                                         
                                     </div>
-                                    
                                 </div>
                                 
                             )
